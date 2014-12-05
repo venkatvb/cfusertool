@@ -1,0 +1,7 @@
+<%= form_tag('/blabla', {:html => { :method => 'GET' }}) do %>
+	<%= label_tag "name", "Handle1" %>
+    <%= text_field_tag "one" %>
+    <%= label_tag "name", "Handle2" %>
+    <%= text_field_tag "two" %>
+    <%= submit_tag "Save" %>
+<% end %>
