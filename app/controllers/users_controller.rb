@@ -15,50 +15,43 @@ class UsersController < ApplicationController
 		return JSON.parse(response.body)
 	end
 
-	def getUniqueProblems(submissions)
-		a = []
-		submissions.each do |i|
-			a << i["problem"]["name"]
-		end
-		return a.uniq
+	def getCurrentSubmission(subm)
+		current = Submission.new(subm["id"], subm["author"]["members"], subm["author"]["participantType"], subm["verdict"])
+		return current
 	end
 
-	def getArrayOfUniqId(submissions)
-		a = []
-		submissions.each do |i|
-			a << (i["problem"]["contestId"].to_s + i["problem"]["index"].to_s)
-		end
-		return a.uniq
+	def getProblem(subm)
+		current = Problem.new(subm["contestId"].to_s+subm["index"].to_s)
+		current.contestId = subm["problem"]["contestId"]
+		current.index = subm["problem"]["index"]
+		current.name = subm["problem"]["name"]
+		current.point = subm["problem"]["points"]
+		current.friendsSubmissions = []
+		current.friendsSubmissions << getCurrentSubmission(subm)
+		return current
 	end
 
-	def hashifyIt(id, index, name, points)
-		ret = {}
-		ret["contestId"] = id;
-		ret["index"] = index
-		ret["name"] = name
-		ret["points"] = points
-		return ret;
-	end
-
-	def getArrayOfFullUniqProblems(submissions, uniq)
-		a = []
-		done = []
-		submissions.each do |problem|
-			if uniq.include?(problem["problem"]["contestId"].to_s + problem["problem"]["index"].to_s)
-				if !(done.include?(problem["problem"]["contestId"].to_s + problem["problem"]["index"].to_s))
-					done << (problem["problem"]["contestId"].to_s + problem["problem"]["index"].to_s)
-					a << hashifyIt(problem["problem"]["contestId"], problem["problem"]["index"], problem["problem"]["name"], problem["problem"]["points"])
+	def getUniqueProblems(subms)
+		problems = []
+		subms.each do |subm|
+			temp = getProblem( subm )
+			unless problems.any? { |problem| problem.id == temp.id }
+				problems << temp
+			else
+				problems.each do |shit|
+					if shit.id == temp.id 
+						shit.friendsSubmissions << temp.friendsSubmissions[0] 
+					end
 				end
 			end
 		end
-		return a
+		return problems
 	end
 
-	def getNotDone(one, two)
-		oneUniq = getArrayOfUniqId(one)
-		twoUniq = getArrayOfUniqId(two)
-		result = twoUniq - oneUniq
-		return getArrayOfFullUniqProblems(two, result)
+	def getNotDone(sub1, sub2)
+		problems1 = getUniqueProblems(sub1)
+		problems2 = getUniqueProblems(sub2)
+		return problems2 - problems1
 	end
 
 	def work
@@ -67,10 +60,10 @@ class UsersController < ApplicationController
 		@two = params[:handle2]
 		url_one = base_url + @one;
 		url_two = base_url + @two;
-		handle1 = parse(url_one)		#uncomment this in production
-		handle2 = parse(url_two)		#uncomment this in production
-		#handle1 = parse("http://localhost/test/venkatvb.html")		#comment this during production
-		#handle2 = parse("http://localhost/test/karthikkamal.html")	#comment this during production
+		#handle1 = parse(url_one)		#uncomment this in production
+		#handle2 = parse(url_two)		#uncomment this in production
+		handle1 = parse("http://localhost/test/venkatvb.html")		#comment this during production
+		handle2 = parse("http://localhost/test/karthikkamal.html")	#comment this during production
 		@bnota = getNotDone(handle1["result"], handle2["result"])
 	end
 end

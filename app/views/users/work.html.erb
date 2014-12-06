@@ -1,14 +1,18 @@
-<table class="table table-striped table-hover">
+<table class="table table-hover">
 <thead>
 	<th>Link</th>
 	<th>Problems</th>
 	<th>Points</th>
 </thead>
 <% @bnota.each do |problem| %>
-	<tr>
-		<td><%= link_to problem["contestId"].to_s+problem["index"].to_s, "http://codeforces.com/problemset/problem/#{problem["contestId"].to_s}/#{problem["index"].to_s}" %></td>
-		<td><%= problem["name"] %></td>
-		<td><%= problem["points"] %></td>
+	<% if problem.solved? %>
+		<tr class="success">
+	<% else %>
+		<tr>
+	<% end %>
+		<td><%= link_to problem.id, problem.getUrl %></td>
+		<td><%= problem.name %></td>
+		<td><%= problem.point %></td>
 	</tr>
 <% end %>
 </table>
