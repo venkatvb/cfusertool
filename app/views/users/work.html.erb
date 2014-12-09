@@ -2,6 +2,7 @@
 <thead>
 	<th>Link</th>
 	<th>Problems</th>
+	<th>Days Ago</th>
 	<th>Points</th>
 </thead>
 <% @bnota.each do |problem| %>
@@ -12,6 +13,7 @@
 	<% end %>
 		<td><%= link_to problem.id, problem.getUrl %></td>
 		<td><%= problem.name %></td>
+		<td><%= problem.daysAgo %></td>
 		<td><%= problem.point %></td>
 	</tr>
 <% end %>

@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 		current.index = subm["problem"]["index"]
 		current.name = subm["problem"]["name"]
 		current.point = subm["problem"]["points"]
+		current.creationTime = subm["creationTimeSeconds"]
 		current.friendsSubmissions = []
 		current.friendsSubmissions << getCurrentSubmission(subm)
 		return current

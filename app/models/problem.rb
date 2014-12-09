@@ -10,7 +10,9 @@ class Problem
    # :point # => Points for the problem
    # :friendsSubmissions # => Array of friends Submission
    # :type # => Contest, Gym
-   attr_accessor :id, :name, :contestId, :index, :point, :friendsSubmissions, :type
+   attr_accessor :id, :name, :contestId, :index, :point, :friendsSubmissions, :type,
+                  :creationTime
+
 
    def initialize(id)
    		@id = id
@@ -62,5 +64,12 @@ class Problem
 
    def solved?
       self.friendsSubmissions.any? { |subm| subm.verdict == "OK" }
+   end
+
+   def daysAgo
+      current = Time.now
+      submissionTime = Time.at(self.creationTime)
+      numberOfSecondsInDay = 86400 #60 *60 *24
+      return ( (current - submissionTime) / numberOfSecondsInDay ).to_i
    end
 end
