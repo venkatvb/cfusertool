@@ -46,8 +46,14 @@ class Problem
    end
 
    def getUrl
-      base_url = "http://codeforces.com/problemset/problem/"
-      return base_url.to_s + self.contestId.to_s + "/" + self.index.to_s
+      base_contest_url = "http://codeforces.com/problemset/problem/"
+      base_gym_url = "http://codeforces.com/problemset/gymProblem/"
+      if self.id.length == 4
+         actual_base_url = base_contest_url
+      else
+         actual_base_url = base_gym_url
+      end
+      return actual_base_url.to_s + self.contestId.to_s + "/" + self.index.to_s
    end
 
    def addSubmission(submission)
