@@ -1,0 +1,7 @@
+TODO:
+1.	Edit readme
+2.	Account signup auth
+3.	Compare multiple users
+4.	Optimize compare method
+5.	Sort tables (acc Columns)
+6.	Pagination
