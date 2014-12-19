@@ -1,6 +1,5 @@
 Cfusertool::Application.routes.draw do
-  get "accounts/new"
-
+  resources "accounts"
   match '/' => 'users#index'
   get '/:handle1/:handle2', :to => "users#work"
   match '/tests' => 'tests#index'
