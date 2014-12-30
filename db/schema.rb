@@ -23,11 +23,4 @@ ActiveRecord::Schema.define(:version => 20141211184052) do
 
   add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
 
-  create_table "handles", :force => true do |t|
-    t.string   "one"
-    t.string   "two"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
 end
