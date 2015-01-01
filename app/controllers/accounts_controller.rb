@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+
   def new
   	@account = Account.new
   end
@@ -10,5 +11,9 @@ class AccountsController < ApplicationController
   	else
   		render 'new'
   	end
+  end
+
+  def show
+    
   end
 end

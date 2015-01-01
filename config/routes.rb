@@ -1,8 +1,13 @@
 Cfusertool::Application.routes.draw do
   resources "accounts"
+  #resources "sessions"
   match '/' => 'users#index'
   get '/:handle1/:handle2', :to => "users#work"
+  post '/signin' => 'sessions#create'
   match '/tests' => 'tests#index'
+  match '/signup' => 'accounts#new'
+  match '/signin' => 'sessions#new'
+  match '/signout' => 'sessions#destroy'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

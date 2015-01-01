@@ -9,6 +9,7 @@ describe Account do
 	it { should respond_to :password_digest }
 	it { should respond_to :password }
 	it { should respond_to :password_confirmation }
+	it { should respond_to :remember_token }
 	it { should be_valid }
 	describe "when account name not present" do
 		before { @account.name = " " }
@@ -36,4 +37,8 @@ describe Account do
 	end
 	#No tests done for passwords yet
 	#MANDATORY -- JUST do IT
+	describe "remember token " do
+		before { @account.save }
+		its(:remember_token) { should_not be_blank}
+	end
 end
