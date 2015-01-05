@@ -25,11 +25,4 @@ ActiveRecord::Schema.define(:version => 20141230115558) do
   add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
   add_index "accounts", ["remember_token"], :name => "index_accounts_on_remember_token"
 
-  create_table "handles", :force => true do |t|
-    t.string   "one"
-    t.string   "two"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
 end
