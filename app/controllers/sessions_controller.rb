@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 		if account && account.authenticate(params[:session][:password])
 			#success
 			sign_in account
-			redirect_to account
+			redirect_to "/"
 		else
 			render 'new'
 		end

@@ -22,4 +22,7 @@ module SessionsHelper
 		@current_account = Account.find_by_remember_token(cookies[:remember_token])
 	end
 
+	def get_name
+		@current_account.name
+	end
 end
