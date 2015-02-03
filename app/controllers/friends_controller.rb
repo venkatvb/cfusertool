@@ -4,9 +4,10 @@ class FriendsController < ApplicationController
 	end
 
 	def create
-		contents = params[:friend]
-		h = Hash.new(params["friend"])
-		@friend = Friend.new(h)
+		#contents = params[:friend]
+		#h = Hash.new({:name => "cv"})
+		#raise params[:friends].inspect
+		@friend = Friend.new(params[:friends])
 	  	if @friend.save
 	  		#saved successful
 	  	else
