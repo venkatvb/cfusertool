@@ -1,0 +1,22 @@
+<br>
+<div class="jumbotron">
+    <%= form_for(:friends, :url => '/create', :html => { :class => "form-horizontal" } ) do |f| %>
+    <fieldset>
+        <legend>Add Handle</legend>
+        <div class="form-group">
+            <%= f.label :handle, :class => "col-lg-2 control-label" %>
+            <div class="col-lg-10">
+                <%= f.text_field :handle, :class => "form-control", :placeholder => "Handle" %>
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+      
+    <% end %>
+</div>

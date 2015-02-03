@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails cfusertool: development" uuid="a87bb81e-e5d8-4c60-bda9-2d77e7c9e982">
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Rails cfusertool: test" uuid="555432ae-77b8-475e-ba56-e175b92bc80b">
+      <first-sync>true</first-sync>
+    </data-source>
+  </component>
+</project>

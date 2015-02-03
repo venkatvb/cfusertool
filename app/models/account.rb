@@ -1,5 +1,7 @@
 class Account < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :remember_token
+  has_many :friends
+  
   has_secure_password	#This one made the magic for you :) google it :)
 
   before_save { |account| account.email = email.downcase }
