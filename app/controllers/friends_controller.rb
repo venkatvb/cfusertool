@@ -14,6 +14,7 @@ class FriendsController < ApplicationController
 		#raise params[:friends].inspect
 		if signed_in?
 			@friend = Friend.new(params[:friends])
+			@friend.account_id = get_account_id
 		  	if @friend.save
 		  		#saved successful
 		  	else

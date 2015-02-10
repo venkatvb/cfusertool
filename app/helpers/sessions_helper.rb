@@ -25,4 +25,8 @@ module SessionsHelper
 	def get_name
 		@current_account.name
 	end
+
+	def get_account_id
+		@current_account.id
+	end
 end
