@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 		if account && account.authenticate(params[:session][:password])
 			#success
 			sign_in account
+			flash[:success] = "Welcome to the CFUserTool!"
 			redirect_to "/"
 		else
 			render 'new'

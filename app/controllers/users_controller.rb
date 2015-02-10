@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 	
 	
 	def index
+		if !signed_in?
+			flash[:danger] = "Oh snap! You should Sign in now! then try again.";
+		end
 	end
 
 	def parse(url)

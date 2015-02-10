@@ -1,18 +1,27 @@
 class FriendsController < ApplicationController
+	
 	def new
-		@friend = Friend.new
+		if signed_in?
+			@friend = Friend.new
+		else
+			render 'users/index'	
+		end
 	end
 
 	def create
 		#contents = params[:friend]
 		#h = Hash.new({:name => "cv"})
 		#raise params[:friends].inspect
-		@friend = Friend.new(params[:friends])
-	  	if @friend.save
-	  		#saved successful
-	  	else
-	  		render 'new'
-	  	end
+		if signed_in?
+			@friend = Friend.new(params[:friends])
+		  	if @friend.save
+		  		#saved successful
+		  	else
+		  		render 'new'
+		  	end
+		else
+			render 'new'
+		end
 	end
 
 end
