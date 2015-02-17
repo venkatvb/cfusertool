@@ -7,17 +7,6 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def parse(url)
-		require "net/http"
-		require "uri"
-		require "json"
-		uri = URI.parse(url)
-		http = Net::HTTP.new(uri.host, uri.port)
-		request = Net::HTTP::Get.new(uri.request_uri)
-		response = http.request(request)
-		return JSON.parse(response.body)
-	end
-
 	def getCurrentSubmission(subm)
 		current = Submission.new(subm["id"], subm["author"]["members"], subm["author"]["participantType"], subm["verdict"])
 		return current

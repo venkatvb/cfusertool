@@ -6,6 +6,7 @@ class FriendsController < ApplicationController
 			@myfriend = Friend.all
 			@index = 1
 		else
+			flash.delete(:success)
 			flash[:danger] = "Oh snap! You should Sign in now! then try again.";
 			render 'users/index'	
 		end
@@ -20,15 +21,25 @@ class FriendsController < ApplicationController
 			@friend.account_id = get_account_id
 			@myfriend
 			@index = 1
-		  	if @friend.save
-		  		#saved successful
-		  		@myfriend = Friend.all
-		  		flash[:success] = "yay! #{@myfriend.last.handle} is added."
-		  		render 'new'
-		  	else
-		  		flash[:danger] = "Oh something went wrong! please try again later.";
-		  		render 'new'
-		  	end
+			status = getStatusOfHandle(@friend.handle)
+			if status != "OK"
+				@myfriend = Friend.all
+				flash.delete(:success)
+				flash[:danger] = "Uh.! The user with the handle #{@friend.handle} doesn't exist."
+				render 'new'
+			else
+			  	if @friend.save
+			  		#saved successful
+			  		@myfriend = Friend.all
+			  		flash.delete(:danger)
+			  		flash[:success] = "yay! #{@friend.handle} is added."
+			  		render 'new'
+			  	else
+			  		flash.delete(:success)
+			  		flash[:danger] = "Oh something went wrong! please try again later.";
+			  		render 'new'
+			  	end
+			end
 		else
 			flash[:danger] = "Oh snap! You should Sign in now! then try again.";
 			render 'new'
