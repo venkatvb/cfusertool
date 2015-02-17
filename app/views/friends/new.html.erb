@@ -1,22 +1,54 @@
-<br>
-<div class="jumbotron">
-    <%= form_for(:friends, :url => '/create', :html => { :class => "form-horizontal" } ) do |f| %>
-    <fieldset>
-        <legend>Add Handle</legend>
-        <div class="form-group">
-            <%= f.label :handle, :class => "col-lg-2 control-label" %>
-            <div class="col-lg-10">
-                <%= f.text_field :handle, :class => "form-control", :placeholder => "Handle" %>
-            </div>
+<% flash.each do |key, value| %>
+    <div class="alert alert-dismissable alert-<%= key %>">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <%= value %>
+    </div>
+<% end %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron col-md-4">
+            <%= form_for(:friends, :url => '/create', :html => { :class => "form-horizontal" } ) do |f| %>
+                <fieldset>
+                    <legend>Add Handle</legend>
+                    <div class="form-group">
+                        <%= f.label :handle, :class => "col-lg-2 control-label" %>
+                        <div class="col-lg-10">
+                            <%= f.text_field :handle, :class => "form-control", :placeholder => "Handle" %>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <%= button_tag "Reset", type: :reset, :class => "btn" %>
+                            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>  
+            <% end %>
         </div>
-       
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+        <div class="col-md-8">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Friends Handle</th>
+                    </tr>
+                </thead>
+                <tbody>   
+                    <% @myfriend.each do |dost| %>
+                        <tr>
+                            <td>
+                                <%= @index %>
+                                <% @index += 1 %>
+                            </td>
+                            <td>
+                                <%= dost.handle %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
         </div>
-    </fieldset>
-      
-    <% end %>
+    </div>
 </div>
