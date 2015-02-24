@@ -34,11 +34,4 @@ ActiveRecord::Schema.define(:version => 20150203033119) do
 
   add_index "friends", ["account_id"], :name => "index_friends_on_account_id"
 
-  create_table "handles", :force => true do |t|
-    t.string   "one"
-    t.string   "two"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
 end

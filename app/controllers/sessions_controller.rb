@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
 			flash[:success] = "Welcome to the CFUserTool!"
 			redirect_to "/"
 		else
+			flash[:danger] = "Oh snap! Invalid username and password combination";
 			render 'new'
 		end
 	end
@@ -20,3 +21,5 @@ class SessionsController < ApplicationController
 		redirect_to "/"
 	end
 end
+
+

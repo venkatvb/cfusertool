@@ -3,7 +3,7 @@ class FriendsController < ApplicationController
 	def new
 		if signed_in?
 			@friend = Friend.new
-			@myfriend = Friend.all
+			@myfriend = Friend.find_all_by_account_id ( get_account_id )
 			@index = 1
 		else
 			flash.delete(:success)
@@ -23,14 +23,14 @@ class FriendsController < ApplicationController
 			@index = 1
 			status = getStatusOfHandle(@friend.handle)
 			if status != "OK"
-				@myfriend = Friend.all
+				@myfriend = Friend.find_all_by_account_id ( get_account_id )
 				flash.delete(:success)
 				flash[:danger] = "Uh.! The user with the handle #{@friend.handle} doesn't exist."
 				render 'new'
 			else
 			  	if @friend.save
 			  		#saved successful
-			  		@myfriend = Friend.all
+			  		@myfriend = Friend.find_all_by_account_id ( get_account_id )
 			  		flash.delete(:danger)
 			  		flash[:success] = "yay! #{@friend.handle} is added."
 			  		render 'new'
