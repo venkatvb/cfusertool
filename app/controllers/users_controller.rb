@@ -3,7 +3,12 @@ class UsersController < ApplicationController
 	
 	def index
 		if !signed_in?
-			flash[:danger] = "Oh snap! You should Sign in now! then try again.";
+			flash[:danger] = "Oh snap! You should Sign in now! then try again."
+		else
+			# getFriendsInformation is defined in application_helper.rb
+			@usersInfo = getFriendsInformation
+			# if @usersInfo if FAILED then some of the handle is invalid else you get the array of user details as string
+			# raise @usersInfo.inspect
 		end
 	end
 

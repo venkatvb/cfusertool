@@ -15,8 +15,9 @@
                     </div>
                 </div>
                 <div class="clearfix visible-sm-block"></div>
-                <div class="col-lg-9 col-md-9 col-sm-12">
-                
+                <div class="col-lg-9 col-md-9 col-sm-12"> 
+                    <div id="ratingschart" style="height: 250px;">
+                    </div>        
                 </div>
                 <div class="clearfix visible-md-block"></div>
                 <div class="clearfix visible-lg-block"></div>
@@ -29,6 +30,7 @@
             <div class="clearfix visible-lg-block"></div>
             <div class="clearfix visible-sm-block"></div>
         </div>
+
     </div>
 	
 	<%= render 'shared/css' %>
@@ -38,3 +40,23 @@
         <strong>Oh snap! You should</strong> <%= link_to "Sign up now!", signup_path %> then try again.
     </div> -->
 <% end %>
+<!-- Scripts for Drawing morris charts, Raphael charts, and JQuery -->
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <!-- morris charts -->
+        <script type="text/javascript">
+            var mocharts = Morris.Bar({
+              element: 'ratingschart',
+              data: [
+                { handle: 'KaranAggarwal', rating: 100 },
+                { handle: 'Amar', rating: 100 }
+              ],
+              xkey: 'handle',
+              ykeys: ['rating'],
+              labels: ['Rating']
+            });   
+        </script>
+        <script type="text/javascript">
+             mocharts.setData( <%= @usersInfo.html_safe %> )
+        </script>
