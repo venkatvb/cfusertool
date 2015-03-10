@@ -16,8 +16,7 @@
                 </div>
                 <div class="clearfix visible-sm-block"></div>
                 <div class="col-lg-9 col-md-9 col-sm-12"> 
-                    <div id="ratingschart" style="height: 250px;">
-                    </div>        
+                    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
                 </div>
                 <div class="clearfix visible-md-block"></div>
                 <div class="clearfix visible-lg-block"></div>
@@ -30,9 +29,59 @@
             <div class="clearfix visible-lg-block"></div>
             <div class="clearfix visible-sm-block"></div>
         </div>
-
     </div>
-	
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
+    <script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+      colorSet: "colorSet1",
+      backgroundColor: null,
+      theme: "theme3",
+      title:{
+      text: "Submission Distribution"   
+      },
+      animationEnabled: true,
+      axisX: {
+        labelFontSize: 15,
+        labelFontColor: "dimGrey",
+        labelAngle: -45
+      },
+
+      data: [
+      {        
+        type: "stackedColumn",
+        toolTipContent: "{label}<br/><span style='\"'color: {color};'\"'><strong>{name}</strong></span>: {y}",
+        name: "Rating",
+        showInLegend: "true",
+        dataPoints: [
+        ]
+      }           
+      ]
+      ,
+      legend:{
+        cursor:"pointer",
+        itemclick: function(e) {
+          if (typeof (e.dataSeries.visible) ===  "undefined" || e.dataSeries.visible) {
+              e.dataSeries.visible = false;
+          }
+          else
+          {
+            e.dataSeries.visible = true;
+          }
+          chart.render();
+        }
+      }
+    });
+    chart.options.title.text = "Rating Distribution";
+    // chart.options.data[0].dataPoints.push({ y: 1932, label: 'darkshadows' },{ y: 2179, label: 'karanaggarwal' },{ y: 1614, label: 'venkatvb' },{ y: 2084, label: 'xorfire' },{ y: 1913, label: 'anudeep2011' },{ y: 2084, label: 'xorfire' },{ y: 1913, label: 'anudeep2011' },{ y: 2179, label: 'karanaggarwal' });
+    chart.options.data[0].dataPoints.push( <%= getFriendsInformation.html_safe %> );
+    chart.render();
+  }
+  </script>
+  
 	<%= render 'shared/css' %>
 <% else %>
   <!--  <div class="alert alert-dismissable alert-danger">
@@ -40,23 +89,3 @@
         <strong>Oh snap! You should</strong> <%= link_to "Sign up now!", signup_path %> then try again.
     </div> -->
 <% end %>
-<!-- Scripts for Drawing morris charts, Raphael charts, and JQuery -->
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-        <!-- morris charts -->
-        <script type="text/javascript">
-            var mocharts = Morris.Bar({
-              element: 'ratingschart',
-              data: [
-                { handle: 'KaranAggarwal', rating: 100 },
-                { handle: 'Amar', rating: 100 }
-              ],
-              xkey: 'handle',
-              ykeys: ['rating'],
-              labels: ['Rating']
-            });   
-        </script>
-        <script type="text/javascript">
-             mocharts.setData( <%= @usersInfo.html_safe %> )
-        </script>

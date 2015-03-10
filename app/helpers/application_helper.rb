@@ -20,7 +20,7 @@ module ApplicationHelper
 	end
 
 	def getFriendsInformation()
-		friends = Friend.where(:account_id => 1).select( :handle )
+		friends = Friend.where(:account_id => get_account_id ).select( :handle )
 		# We need to have semicolon seperated list of friends
 		commaSeperatedFriendList = get_name + ";"
 		friends.each do |f|
@@ -38,16 +38,18 @@ module ApplicationHelper
 		end
 
 		# From this point The resultant JSON is valid -> to be changd to the below format
-		# [
-		#     { handle: 'KaranAggarwal', rating: 100 },
-		#     { handle: 'roopesh', rating: 100 },
-		# ]
-		answerString = "["
+		#     { y: 'KaranAggarwal', label: 100 },
+		#     { y: 'roopesh', label: 100 }
+
+		answerString = ""
 		details = resultJson["result"]
-		details.each do |detail|
-			answerString = answerString + "{ handle: '#{detail['handle']}', rating: #{detail['rating']} },"
+		details.each_with_index do |detail, index|
+			if index == details.size - 1
+				answerString = answerString + "{ y: #{detail['rating']}, label: '#{detail['handle']}' }"
+				next
+			end
+			answerString = answerString + "{ y: #{detail['rating']}, label: '#{detail['handle']}' },"
 		end
-		answerString = answerString + ']'
 		return answerString
 	end
 
