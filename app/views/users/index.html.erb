@@ -24,6 +24,28 @@
             <div class="clearfix visible-sm-block"></div>
             <div class="col-lg-3 col-md-9 col-sm-12">
                 <%= link_to "Add Friends", { :controller => "friends", :action => "new"}, :class => "btn btn-primary btn-raised" %>
+                    <div class="jumbotron">
+                      <div class="span6 offset3">
+                        <form>
+
+                          <fieldset>
+                            <legend>Compare Handles</legend>
+                            <div class="form-group">
+                            
+                              <div class="col-lg-10">
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-md-2 col-md-offset-2">
+                                <button class="btn btn-large btn-primary">Compare</button>
+                              </div>
+                            </div>
+                          </fieldset>
+                          </form>
+                      </div>
+                    </div>
             </div>
             <div class="clearfix visible-md-block"></div>
             <div class="clearfix visible-lg-block"></div>
@@ -79,30 +101,10 @@
     // chart.options.data[0].dataPoints.push({ y: 1932, label: 'darkshadows' },{ y: 2179, label: 'karanaggarwal' },{ y: 1614, label: 'venkatvb' },{ y: 2084, label: 'xorfire' },{ y: 1913, label: 'anudeep2011' },{ y: 2084, label: 'xorfire' },{ y: 1913, label: 'anudeep2011' },{ y: 2179, label: 'karanaggarwal' });
     chart.options.data[0].dataPoints.push( <%= getFriendsInformation.html_safe %> );
     chart.render();
+    $('a.canvasjs-chart-credit').text("")
   }
   </script>
   
-	<%= render 'shared/css' %>
-    <!-- Scripts for Drawing morris charts, Raphael charts, and JQuery -->
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <!-- morris charts -->
-    <script type="text/javascript">
-        var mocharts = Morris.Bar({
-          element: 'ratingschart',
-          data: [
-            { handle: 'KaranAggarwal', rating: 100 }
-          ],
-          xkey: 'handle',
-          ykeys: ['rating'],
-          labels: ['Rating']
-        });   
-    </script>
-    <script type="text/javascript">
-        mocharts.setData( <%= @usersInfo.html_safe %> )
-    </script>
-
 <% else %>
   <!--  <div class="alert alert-dismissable alert-danger">
         <button type="button" class="close" data-dismiss="alert">×</button>
