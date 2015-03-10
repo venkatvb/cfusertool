@@ -3,8 +3,10 @@ class Account < ActiveRecord::Base
   has_many :friends
   
   has_secure_password	#This one made the magic for you :) google it :)
-
+  # write the test for the email is sotred as downcase in databse
   before_save { |account| account.email = email.downcase }
+  # write the test for no whitespaces before or after the handle in name field
+  before_save { |account| account.name = name.strip }
   before_save :create_remember_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

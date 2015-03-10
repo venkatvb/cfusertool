@@ -83,6 +83,26 @@
   </script>
   
 	<%= render 'shared/css' %>
+    <!-- Scripts for Drawing morris charts, Raphael charts, and JQuery -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <!-- morris charts -->
+    <script type="text/javascript">
+        var mocharts = Morris.Bar({
+          element: 'ratingschart',
+          data: [
+            { handle: 'KaranAggarwal', rating: 100 }
+          ],
+          xkey: 'handle',
+          ykeys: ['rating'],
+          labels: ['Rating']
+        });   
+    </script>
+    <script type="text/javascript">
+        mocharts.setData( <%= @usersInfo.html_safe %> )
+    </script>
+
 <% else %>
   <!--  <div class="alert alert-dismissable alert-danger">
         <button type="button" class="close" data-dismiss="alert">×</button>
