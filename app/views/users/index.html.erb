@@ -4,6 +4,7 @@
         <%= value %>
     </div>
 <% end %>
+
 <% if signed_in? %>
     
 	<div class="container">
@@ -31,15 +32,16 @@
                           <fieldset>
                             <legend>Compare Handles</legend>
                             <div class="form-group">
-                            
-                              <div class="col-lg-10">
-                                <input type="text" class="form-control">
+                              <div class="col-lg-12">
+                                  <select class="form-control" id="friendselect" >
+                                    <% list = getFriendList.map { |i| i.handle } %>
+                                    <%= options_for_select( list ) %>
+                                  </select>
                               </div>
                             </div>
-
                             <div class="row">
-                              <div class="col-md-2 col-md-offset-2">
-                                <button class="btn btn-large btn-primary">Compare</button>
+                              <div class="col-md-2 col-md-offset-2 compareclass">
+                                <a class="btn btn-large btn-primary" href= "/<%= get_name %>/karanaggarwal" %> Compare</a>
                               </div>
                             </div>
                           </fieldset>
@@ -52,64 +54,10 @@
             <div class="clearfix visible-sm-block"></div>
         </div>
     </div>
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
-    <script type="text/javascript">
-  window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-      colorSet: "colorSet1",
-      backgroundColor: null,
-      theme: "theme3",
-      title:{
-      text: "Submission Distribution"   
-      },
-      animationEnabled: true,
-      axisX: {
-        labelFontSize: 15,
-        labelFontColor: "dimGrey",
-        labelAngle: -45
-      },
-
-      data: [
-      {        
-        type: "stackedColumn",
-        toolTipContent: "{label}<br/><span style='\"'color: {color};'\"'><strong>{name}</strong></span>: {y}",
-        name: "Rating",
-        showInLegend: "true",
-        dataPoints: [
-        ]
-      }           
-      ]
-      ,
-      legend:{
-        cursor:"pointer",
-        itemclick: function(e) {
-          if (typeof (e.dataSeries.visible) ===  "undefined" || e.dataSeries.visible) {
-              e.dataSeries.visible = false;
-          }
-          else
-          {
-            e.dataSeries.visible = true;
-          }
-          chart.render();
-        }
-      }
-    });
-    chart.options.title.text = "Rating Distribution";
-    // chart.options.data[0].dataPoints.push({ y: 1932, label: 'darkshadows' },{ y: 2179, label: 'karanaggarwal' },{ y: 1614, label: 'venkatvb' },{ y: 2084, label: 'xorfire' },{ y: 1913, label: 'anudeep2011' },{ y: 2084, label: 'xorfire' },{ y: 1913, label: 'anudeep2011' },{ y: 2179, label: 'karanaggarwal' });
-    chart.options.data[0].dataPoints.push( <%= getFriendsInformation.html_safe %> );
-    chart.render();
-    $('a.canvasjs-chart-credit').text("")
-  }
-  </script>
   
-	<%= render 'shared/css' %>
+    <!-- jquery and canvas graph scripts are loaded right in this file -->
+    <%= render 'users/graph' %>
+    <%= render 'users/select_script' %>
+  	<%= render 'shared/css' %>
 
-<% else %>
-  <!--  <div class="alert alert-dismissable alert-danger">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Oh snap! You should</strong> <%= link_to "Sign up now!", signup_path %> then try again.
-    </div> -->
 <% end %>

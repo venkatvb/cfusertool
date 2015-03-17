@@ -19,8 +19,13 @@ module ApplicationHelper
 		return result
 	end
 
+	def getFriendList()
+		return Friend.where(:account_id => get_account_id ).select( :handle )
+	end
+
+
 	def getFriendsInformation()
-		friends = Friend.where(:account_id => get_account_id ).select( :handle )
+		friends = getFriendList()
 		# We need to have semicolon seperated list of friends
 		commaSeperatedFriendList = get_name + ";"
 		friends.each do |f|
