@@ -1,8 +1,18 @@
+<!-- this page is supposed to display 
+1. the problems solved by user1 not by user2
+2. the problems solved by user2 not by user1
+3. the problems solved by both the users
+4. Graph on total points socred by user1 and user2 -->
+
+<div class="col-md-4">
+<div class="alert alert-danger">
+	Problems solved by <%= @secondUser %> but not by <%= @firstUser %>.
+</div>
 <table class="table table-hover">
 <thead>
-	<th>Link</th>
+	<th>Link</th>	
 	<th>Problems</th>
-	<th>Days Ago</th>
+	<th>Ago</th>
 	<th>Points</th>
 </thead>
 <% @bnota.each do |problem| %>
@@ -18,3 +28,56 @@
 	</tr>
 <% end %>
 </table>
+</div>
+
+<div class="col-md-4">
+<div class="alert alert-danger">
+	Problems solved by <%= @firstUser %> but not by <%= @secondUser %>.
+</div>
+<table class="table table-hover">
+<thead>
+	<th>Link</th>	
+	<th>Problems</th>
+	<th>Ago</th>
+	<th>Points</th>
+</thead>
+<% @anotb.each do |problem| %>
+	<% if problem.solved? %>
+		<tr class="success">
+	<% else %>
+		<tr>
+	<% end %>
+		<td><%= link_to problem.id, problem.getUrl %></td>
+		<td><%= problem.name %></td>
+		<td><%= problem.daysAgo %></td>
+		<td><%= problem.point %></td>
+	</tr>
+<% end %>
+</table>
+</div>
+
+<div class="col-md-4">
+<div class="alert alert-danger">
+	Problems solved by both <%= @firstUser %> and <%= @secondUser %>.
+</div>
+<table class="table table-hover">
+<thead>
+	<th>Link</th>	
+	<th>Problems</th>
+	<th>Ago</th>
+	<th>Points</th>
+</thead>
+<% @aandb.each do |problem| %>
+	<% if problem.solved? %>
+		<tr class="success">
+	<% else %>
+		<tr>
+	<% end %>
+		<td><%= link_to problem.id, problem.getUrl %></td>
+		<td><%= problem.name %></td>
+		<td><%= problem.daysAgo %></td>
+		<td><%= problem.point %></td>
+	</tr>
+<% end %>
+</table>
+</div>
