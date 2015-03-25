@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	
+		
 	
 	def index
 		if !signed_in?
@@ -30,12 +30,18 @@ class UsersController < ApplicationController
 		return current
 	end
 
-	def getUniqueProblems(subms)
+	# This method gets the unique problems and also sets the total score
+	def getUniqueProblems(subms, val)
 		problems = []
 		subms.each do |subm|
 			temp = getProblem( subm )
 			unless problems.any? { |problem| problem.id == temp.id }
 				problems << temp
+				if val == 1
+					@totalscoreA += problems[0].point.to_i
+				else
+					@totalscoreB += problems[0].point.to_i
+				end
 			else
 				problems.each do |shit|
 					if shit.id == temp.id 
@@ -47,9 +53,9 @@ class UsersController < ApplicationController
 		return problems
 	end
 
-	def getNotDone(sub1, sub2, condition)
-		problems1 = getUniqueProblems(sub1)
-		problems2 = getUniqueProblems(sub2)
+	# Takes two unique submissions and a condition for set difference or intersection
+	# Mind it should take """"unique submissions """"
+	def getNotDone(problems1, problems2, condition)
 		if condition == :true
 			return problems2 - problems1
 		end 
@@ -62,14 +68,48 @@ class UsersController < ApplicationController
 		@secondUser = params[:handle2]
 		@one = params[:handle1]
 		@two = params[:handle2]
+		
+		# attributes made accessible
+		@totalscoreA = 0
+		@totalscoreB = 0
+		@solvedCountA = 0
+		@solvedCountB = 0
+		@submissionCountA = 0
+		@submissionCountB = 0
+		@averageA = 0
+		@averageB = 0
+		@mostA = 0
+		@mostB = 0
+		# end of attributes made accessible
+		
 		url_one = base_url + @one;
 		url_two = base_url + @two;
-		handle1 = parse(url_one)		#uncomment this in production
-		handle2 = parse(url_two)		#uncomment this in production
-		# handle1 = parse("http://localhost/test/venkatvb.html")		#comment this during production
-		# handle2 = parse("http://localhost/test/karthikkamal.html")	#comment this during production
-		@bnota = getNotDone(handle1["result"], handle2["result"], :true)
-		@anotb = getNotDone(handle2["result"], handle1["result"], :true)
-		@aandb = getNotDone(handle2["result"], handle1["result"], :false)
+		
+		# handle1 = parse(url_one)		#uncomment this in production
+		# handle2 = parse(url_two)		#uncomment this in production
+		handle1 = parse("http://localhost/test/venkatvb.html")		#comment this during production
+		handle2 = parse("http://localhost/test/karthikkamal.html")	#comment this during production
+
+		# setting the number of submission
+		@submissionCountA = handle1["result"].length.inspect
+		@submissionCountB = handle2["result"].length.inspect
+
+
+		# getting the unique problems
+		problems1 = getUniqueProblems(handle1["result"], 1)
+		problems2 = getUniqueProblems(handle2["result"], 2)
+
+		# setting the solvedCount
+		@solvedCountA = problems1.length.inspect
+		@solvedCountB = problems2.length.inspect
+
+		# computing average number of attempts to solve a problem
+		@averageA = @submissionCountA.to_f / @solvedCountA.to_f
+		@averageB = @submissionCountB.to_f / @solvedCountB.to_f
+
+		# setting submission union and intersection
+		@bnota = getNotDone(problems1, problems2, :true)
+		@anotb = getNotDone(problems2, problems1, :true)
+		@aandb = getNotDone(problems2, problems1, :false)
 	end
 end
