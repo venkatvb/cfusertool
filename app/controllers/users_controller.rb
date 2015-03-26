@@ -38,9 +38,9 @@ class UsersController < ApplicationController
 			unless problems.any? { |problem| problem.id == temp.id }
 				problems << temp
 				if val == 1
-					@totalscoreA += problems[0].point.to_i
+					@totalscoreA += temp.point.to_i
 				else
-					@totalscoreB += problems[0].point.to_i
+					@totalscoreB += temp.point.to_i
 				end
 			else
 				problems.each do |shit|
@@ -91,8 +91,8 @@ class UsersController < ApplicationController
 		# handle2 = parse("http://localhost/test/karthikkamal.html")	#comment this during production
 
 		# setting the number of submission
-		@submissionCountA = handle1["result"].length.inspect
-		@submissionCountB = handle2["result"].length.inspect
+		@submissionCountA = handle1["result"].length.inspect.to_i
+		@submissionCountB = handle2["result"].length.inspect.to_i
 
 
 		# getting the unique problems
@@ -100,13 +100,12 @@ class UsersController < ApplicationController
 		problems2 = getUniqueProblems(handle2["result"], 2)
 
 		# setting the solvedCount
-		@solvedCountA = problems1.length.inspect
-		@solvedCountB = problems2.length.inspect
+		@solvedCountA = problems1.length.inspect.to_i
+		@solvedCountB = problems2.length.inspect.to_i
 
 		# computing average number of attempts to solve a problem
 		@averageA = @submissionCountA.to_f / @solvedCountA.to_f
 		@averageB = @submissionCountB.to_f / @solvedCountB.to_f
-
 
 		# setting submission union and intersection
 		@bnota = getNotDone(problems1, problems2, :true)
