@@ -161,7 +161,6 @@ Most Number of problems in a day. (which day? optional)
 <thead>
 	<th>Link</th>	
 	<th>Problems</th>
-	<th>Ago</th>
 	<th>Points</th>
 </thead>
 <% @aandb.each do |problem| %>
@@ -172,7 +171,6 @@ Most Number of problems in a day. (which day? optional)
 	<% end %>
 		<td><%= link_to problem.id, problem.getUrl %></td>
 		<td><%= problem.name %></td>
-		<td><%= problem.daysAgo %></td>
 		<td><%= problem.point %></td>
 	</tr>
 <% end %>
