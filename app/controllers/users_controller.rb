@@ -85,10 +85,10 @@ class UsersController < ApplicationController
 		url_one = base_url + @one;
 		url_two = base_url + @two;
 		
-		handle1 = parse(url_one)		#uncomment this in production
-		handle2 = parse(url_two)		#uncomment this in production
-		# handle1 = parse("http://localhost/test/venkatvb.html")		#comment this during production
-		# handle2 = parse("http://localhost/test/karthikkamal.html")	#comment this during production
+		# handle1 = parse(url_one)		#uncomment this in production
+		# handle2 = parse(url_two)		#uncomment this in production
+		handle1 = parse("http://localhost/test/venkatvb.html")		#comment this during production
+		handle2 = parse("http://localhost/test/karthikkamal.html")	#comment this during production
 
 		# setting the number of submission
 		@submissionCountA = handle1["result"].length.inspect

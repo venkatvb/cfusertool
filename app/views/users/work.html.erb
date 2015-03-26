@@ -28,27 +28,27 @@ Most Number of problems in a day. (which day? optional)
 			</thead>
 			<tbody>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @totalscoreA > @totalscoreB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @totalscoreA > @totalscoreB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Total Score</td>
-					<td style="vertical-align: middle;"><%= @totalscoreB %></td>
+					<td style="vertical-align: middle;"><%= @totalscoreA %></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @solvedCountA > @solvedCountB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @solvedCountA > @solvedCountB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Number of Problems Solved</td>
-					<td style="vertical-align: middle;"><%= @solvedCountB %></td>
+					<td style="vertical-align: middle;"><%= @solvedCountA %></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @submissionCountA > @submissionCountB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @submissionCountA > @submissionCountB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Number of Submissions Made</td>
-					<td style="vertical-align: middle;"><%= @submissionCountB %></td>
+					<td style="vertical-align: middle;"><%= @submissionCountA %></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @averageA < @averageB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @averageA < @averageB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Average Attempts to solve Problem</td>
-					<td style="vertical-align: middle;"><%= @averageB %></td>
+					<td style="vertical-align: middle;"><%= @averageA %></td>
 				</tr>
 				<!-- <tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @mostA > @mostB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @mostA > @mostB ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Most Problems in a day</td>
 					<td style="vertical-align: middle;"><%= @mostB %></td>
 				</tr> -->
@@ -71,27 +71,27 @@ Most Number of problems in a day. (which day? optional)
 			</thead>
 			<tbody>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @totalscoreB > @totalscoreA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @totalscoreB > @totalscoreA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Total Score</td>
 					<td style="vertical-align: middle;"><%= @totalscoreB %></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @solvedCountB > @solvedCountA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @solvedCountB > @solvedCountA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Number of Problems Solved</td>
 					<td style="vertical-align: middle;"><%= @solvedCountB %></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @submissionCountB > @submissionCountA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @submissionCountB > @submissionCountA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Number of Submissions Made</td>
 					<td style="vertical-align: middle;"><%= @submissionCountB %></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @averageB < @averageA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @averageB < @averageA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Average Attempts to solve Problem</td>
 					<td style="vertical-align: middle;"><%= @averageB %></td>
 				</tr>
 				<!-- <tr>
-					<td style="vertical-align: middle;"><a href="javascript:void(0)" class="btn btn-<%= @mostB > @mostA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
+					<td style="vertical-align: middle;"><a class="btn btn-<%= @mostB > @mostA ? 'success' : 'danger' %> btn-fab btn-raised mdi-action-group-work"></a></td>
 					<td style="vertical-align: middle;">Most Problems in a day</td>
 					<td style="vertical-align: middle;"><%= @mostB %></td>
 				</tr> -->
