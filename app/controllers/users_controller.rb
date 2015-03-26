@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 	end
 
 	def work
-		base_url = "http://codeforces.com/api/user.status?handle="
+		base_url = "https://codeforces.com/api/user.status?handle="
 		@firstUser = params[:handle1]
 		@secondUser = params[:handle2]
 		@one = params[:handle1]

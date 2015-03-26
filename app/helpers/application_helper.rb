@@ -12,7 +12,7 @@ module ApplicationHelper
 	end
 
 	def getStatusOfHandle(handle)
-		base_url = "http://codeforces.com/api/user.status?handle="
+		base_url = "https://codeforces.com/api/user.status?handle="
 		url_one = base_url + handle
 		resultJson = parse(url_one)	
 		result = resultJson["status"]
