@@ -30,17 +30,21 @@ class UsersController < ApplicationController
 		return current
 	end
 
-	# This method gets the unique problems and also sets the total score
+	# This method gets the unique problems and also sets the total score, most problems in a day
 	def getUniqueProblems(subms, val)
 		problems = []
+		problemsADay = {}
 		subms.each do |subm|
 			temp = getProblem( subm )
 			unless problems.any? { |problem| problem.id == temp.id }
 				problems << temp
+				problemsADay[ temp.daysAgo ] = problemsADay[ temp.daysAgo ].to_i + 1
 				if val == 1
 					@totalscoreA += temp.point.to_i
+					@mostA = [problemsADay[ temp.daysAgo ], @mostA ].max
 				else
 					@totalscoreB += temp.point.to_i
+					@mostB = [problemsADay[ temp.daysAgo ], @mostB ].max
 				end
 			else
 				problems.each do |shit|
