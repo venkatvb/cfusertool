@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150203033119) do
+ActiveRecord::Schema.define(:version => 20150918083042) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -33,5 +33,18 @@ ActiveRecord::Schema.define(:version => 20150203033119) do
   end
 
   add_index "friends", ["account_id"], :name => "index_friends_on_account_id"
+
+  create_table "todos", :force => true do |t|
+    t.integer  "account_id"
+    t.string   "name"
+    t.string   "url"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.boolean  "done"
+    t.string   "tags"
+  end
+
+  add_index "todos", ["account_id"], :name => "index_todos_on_account_id"
 
 end

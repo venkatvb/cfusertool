@@ -1,0 +1,8 @@
+<div ng-controller="ListController">
+	<span ng-if="data.status == false">You have to be logged in.</span>	
+	<ul>
+		<li ng-repeat="instance in data.result">
+			{{instance.name}}
+		</li>
+	</ul>
+</div>

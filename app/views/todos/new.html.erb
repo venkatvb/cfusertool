@@ -1,0 +1,32 @@
+<%= form_for(@todo, :html => { :class => "form-horizontal" } ) do |f| %>
+	<fieldset>
+		<legend>Save Todo Problem</legend>
+		
+		<div class="form-group">
+			<%= f.label :Todo, :class => "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.text_field :name, :class => "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :Url, :class => "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.text_field :url, :class => "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :Description, :class => "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.text_field :description, :class => "form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2 col-md-offset-5">
+				<%= f.submit "Submit todo", :class => "btn btn-large btn-primary" %>
+			</div>
+		</div>
+	</fieldset>
+<% end %>

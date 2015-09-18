@@ -1,7 +1,12 @@
 Cfusertool::Application.routes.draw do
+  
   resources "accounts"
-  #resources "sessions"
-  #resources "friends"
+  resources "todos", :only => [:new, :create]
+  
+  match '/todos/list' => 'todos#list'
+
+  get '/api/todos', :to => "api#getTodos"
+
   match '/' => 'users#index'
   get '/:handle1/:handle2', :to => "users#work"
   post '/signin' => 'sessions#create'
@@ -11,6 +16,7 @@ Cfusertool::Application.routes.draw do
   match '/signout' => 'sessions#destroy'
   match '/add' => 'friends#new'
   post '/create' => 'friends#create'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
