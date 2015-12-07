@@ -15,14 +15,15 @@ gem 'jquery-rails'
 
 group :development do 
 	gem 'sqlite3'
-	gem 'rspec-rails', '2.9.0'
-	gem 'guard-rspec', '0.5.5' 
+	gem 'rspec-rails', '3.3.2'
+	gem 'guard-rspec', '4.6.0' 
 end 
 
 group :test do 
 	gem 'sqlite3' 
-	gem 'rspec-rails', '2.9.0'
+	gem 'rspec-rails', '3.3.2'
 	gem 'capybara', '1.1.2'
+	gem 'test-unit'
 end 
 
 

@@ -11,8 +11,19 @@ class ApiController < ApplicationController
 		end
 		render json: response
 	end
+
 	def addTodo
 		@todo = Todo.new
 		# Todo write this method :P
+	end
+	
+	def spoj
+		# raise "came here"
+		
+		render json: test
+	end
+	
+	def cf
+		# Todo write this method :P	
 	end
 end
