@@ -18,12 +18,35 @@ class ApiController < ApplicationController
 	end
 	
 	def spoj
-		# raise "came here"
+		require 'rubygems'
+		require 'nokogiri'
+		require 'open-uri'
+		handle = params["handle"]
+		url = "http://www.spoj.com/users/" + handle
+		cssSelectorForSolvedProblems = ".table-condensed a"
+		cssSelectorForTodoProblems = ".table:nth-child(4) a"
+
+		spojResults = {}
+		solvedProblems = []
+		todoProblems = []
 		
-		render json: test
+		doc = Nokogiri::HTML(open(url))
+		doc.css(cssSelectorForSolvedProblems).each do |problem|
+			if not problem.text.empty?
+				solvedProblems << problem.text
+			end
+		end
+		doc.css(cssSelectorForTodoProblems).each do |problem|
+			if not problem.text.empty?
+				todoProblems << problem.text
+			end
+		end
+
+		spojResults[:handle] = handle
+		spojResults[:solved] = solvedProblems
+		spojResults[:todo] = todoProblems
+		
+		render json: spojResults
 	end
-	
-	def cf
-		# Todo write this method :P	
-	end
+
 end

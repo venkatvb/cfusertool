@@ -192,6 +192,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   guard-rspec (= 4.6.0)
   jquery-rails
+  nokogiri
   pg
   rails (= 3.2.13)
   rspec-rails (= 3.3.2)
