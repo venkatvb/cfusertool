@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151208113518) do
+ActiveRecord::Schema.define(:version => 20151208120744) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20151208113518) do
     t.string   "handle"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "solved"
-    t.string   "todo"
+    t.text     "solved"
+    t.text     "todo"
   end
 
   create_table "spoj_problem_to_tags", :force => true do |t|
