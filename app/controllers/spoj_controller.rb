@@ -11,18 +11,17 @@ class SpojController < ApplicationController
 	end
 
 	def getNokogiriDoc (url)
-		require 'rubygems'
-		require 'nokogiri'
-		require 'open-uri'
-		require 'uri'
-		
-		# check if the required URI is valid
-		if url =~ URI::regexp
+		begin
+			require 'rubygems'
+			require 'nokogiri'
+			require 'open-uri'
+			require 'uri'
+			url = URI.encode(url)
 			doc = Nokogiri::HTML(open(url))
 			return doc
+		rescue Exception => e
+			return false
 		end
-
-		return false
 	end
 
 	def storeProblem(name)
