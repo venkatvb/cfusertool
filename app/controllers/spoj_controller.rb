@@ -120,7 +120,7 @@ class SpojController < ApplicationController
 		end
 
 		@@listOfSpojHandles.each do |t|
-			store = SpojHandle(t)
+			store = SpojHandle.new(t)
 			store.save
 		end
 
