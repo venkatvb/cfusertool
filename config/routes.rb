@@ -6,6 +6,7 @@ Cfusertool::Application.routes.draw do
   match '/todos/list' => 'todos#list'
 
   get '/api/todos', :to => "api#getTodos"
+  get '/api/spoj', :to => "api#spoj"
 
   match '/' => 'users#index'
   get '/:handle1/:handle2', :to => "users#work"
