@@ -14,8 +14,15 @@ class SpojController < ApplicationController
 		require 'rubygems'
 		require 'nokogiri'
 		require 'open-uri'
-		doc = Nokogiri::HTML(open(url))
-		return doc
+		require 'uri'
+		
+		# check if the required URI is valid
+		if url =~ URI::regexp
+			doc = Nokogiri::HTML(open(url))
+			return doc
+		end
+
+		return false
 	end
 
 	def storeProblem(name)
@@ -28,6 +35,10 @@ class SpojController < ApplicationController
 		cssSelectorForTags = ".problem-tag"
 		
 		doc = getNokogiriDoc(informationUrl)
+
+		if doc == false
+			return false
+		end
 
 		results = {}
 		setter = doc.at_css(cssSelectorForProblemSetter).to_s
@@ -53,6 +64,11 @@ class SpojController < ApplicationController
 		todoProblems = []
 		
 		doc = getNokogiriDoc(url)
+
+		if doc == false
+			return false
+		end
+
 		doc.css(cssSelectorForSolvedProblems).each do |problem|
 			if not problem.text.empty?
 				solvedProblems << problem.text
@@ -112,3 +128,5 @@ class SpojController < ApplicationController
 	end
 
 end
+
+viswanath_m-[de
