@@ -1,0 +1,23 @@
+<div class="row-fluid" ng-controller="SpojController">
+	<div class="col-md-9">
+		Hello		
+	</div>
+	<div class="col-md-3">
+		<div class="input-group">
+		    <input type="text" id="addon3a" class="form-control" placeholder="Spoj Handle" ng-model="handle">
+		    <span class="input-group-btn">
+			    <button type="button" class="btn btn-fab btn-fab-mini" ng-click="addHandle('name')">
+			        <i class="material-icons">send</i>
+			    </button>
+		    </span>
+		</div>
+		<div ng-repeat="handle in handles">
+	        <!-- <div class="checkbox"> -->
+	        	<!-- <label> -->
+					<input type="checkbox" ng-model="handles[$index].check"> {{handle.user}}
+	        	<!-- </label> -->
+	        <!-- </div> -->
+		</div>
+	</div>
+</div>
+

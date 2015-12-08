@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150918083042) do
+ActiveRecord::Schema.define(:version => 20151208113518) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,71 @@ ActiveRecord::Schema.define(:version => 20150918083042) do
   end
 
   add_index "friends", ["account_id"], :name => "index_friends_on_account_id"
+
+  create_table "spoj_handles", :force => true do |t|
+    t.string   "name"
+    t.string   "handle"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "solved"
+    t.string   "todo"
+  end
+
+  create_table "spoj_problem_to_tags", :force => true do |t|
+    t.integer  "problemId"
+    t.integer  "tagId"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "spoj_problem_to_users", :force => true do |t|
+    t.integer  "problemId"
+    t.integer  "userId"
+    t.boolean  "solved"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "spoj_problems", :force => true do |t|
+    t.string   "setter"
+    t.integer  "conceptualDifficulty"
+    t.integer  "implementationDifficulty"
+    t.integer  "upvote"
+    t.integer  "downvote"
+    t.integer  "usersAccepted"
+    t.integer  "submissions"
+    t.integer  "accepted"
+    t.integer  "wrongAnswer"
+    t.integer  "compilationError"
+    t.integer  "runtimeError"
+    t.integer  "timeLimitExceeded"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.string   "code"
+  end
+
+  add_index "spoj_problems", ["code"], :name => "index_spoj_problems_on_code", :unique => true
+
+  create_table "spoj_tag_to_problems", :force => true do |t|
+    t.integer  "tagId"
+    t.integer  "problemId"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "spoj_tags", :force => true do |t|
+    t.string   "tagName"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "spoj_user_to_problems", :force => true do |t|
+    t.integer  "userId"
+    t.integer  "problemId"
+    t.boolean  "solved"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "todos", :force => true do |t|
     t.integer  "account_id"
