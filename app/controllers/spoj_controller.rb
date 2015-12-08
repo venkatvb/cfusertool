@@ -5,6 +5,7 @@ class SpojController < ApplicationController
 	@@problemInformationBaseUrl = "http://www.spoj.com/problems/"
 	@@problemRankingBaseUrl = "http://www.spoj.com/ranks/"
 	@@processed = {}
+	@@listOfSpojHandles = []
 
 	def find
 	end
@@ -69,8 +70,7 @@ class SpojController < ApplicationController
 		t[:handle] = handle 
 		t[:solved] = stringOfSolvedProblems
 		t[:todo] = stringofTodoProblems
-		store = SpojHandle.new(t)
-		store.save
+		@@listOfSpojHandles << t
 
 	end
 
@@ -103,6 +103,12 @@ class SpojController < ApplicationController
 		threads.each do |thr|
 			thr.join
 		end
+
+		@@listOfSpojHandles.each do |t|
+			store = SpojHandle(t)
+			store.save
+		end
+
 	end
 
 end
