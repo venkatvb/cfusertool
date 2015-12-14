@@ -1,0 +1,2 @@
+module HackHelper
+end
