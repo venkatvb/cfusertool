@@ -3,6 +3,8 @@ Cfusertool::Application.routes.draw do
   resources "accounts"
   resources "todos", :only => [:new, :create]
   
+  get '/hackit', :to => "hack#doit"
+
   match '/todos/list' => 'todos#list'
 
   get '/api/todos', :to => "api#getTodos"
