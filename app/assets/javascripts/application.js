@@ -13,3 +13,4 @@
 //= require angular
 //= require dirPagination
 //= require app
+//= require self
