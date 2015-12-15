@@ -10,20 +10,6 @@ class SpojController < ApplicationController
 	def find
 	end
 
-	def getNokogiriDoc (url)
-		begin
-			require 'rubygems'
-			require 'nokogiri'
-			require 'open-uri'
-			require 'uri'
-			url = URI.encode(url)
-			doc = Nokogiri::HTML(open(url))
-			return doc
-		rescue Exception => e
-			return false
-		end
-	end
-
 	def storeProblem(name)
 		informationUrl = @@problemInformationBaseUrl + name.to_s
 		cssSelectorForProblemSetter = "#problem-meta tr:nth-child(1) a"
@@ -123,7 +109,10 @@ class SpojController < ApplicationController
 			store = SpojHandle.new(t)
 			store.save
 		end
+	end
 
+	def getToSolveProblems
+		
 	end
 
 end

@@ -1,4 +1,4 @@
-var app = angular.module('todoApp', []);
+var app = angular.module('todoApp', ['angularUtils.directives.dirPagination']);
 
 app.controller('ListController', ["$scope", "$http", function($scope, $http) {
 	$http({ method: 'GET', url: '/api/todos' }).
@@ -11,13 +11,20 @@ app.controller('ListController', ["$scope", "$http", function($scope, $http) {
 }]);
 
 app.controller('SpojController', ["$scope", "$http", function($scope, $http) {
-	$scope.handles = [
-		{user: "venkatvb", check: true},
-		{user: "vb", check: false},
-		{user: "sunil", check: true}
-	];
-	$scope.addHandle = function (name) {
-		$scope.handles.push({user: "roopesh", check: true});
-	}
+	$http({ method: 'GET', url: '/api/spoj/venkatvb' }).
+		success(function (data, status, headers, config) {
+			$scope.problems = data
+		}).
+		error(function (data, status, headers, config) {
+
+		}
+	);
+	$scope.predicate = 'age';
+  	$scope.reverse = true;
+  	$scope.order = function(predicate) {
+  		console.log("came here");
+    	$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+    	$scope.predicate = predicate;
+  	};
 }]);
 

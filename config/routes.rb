@@ -18,6 +18,7 @@ Cfusertool::Application.routes.draw do
   match '/add' => 'friends#new'
   post '/create' => 'friends#create'
 
+  get '/spoj/:handle', :to => "spoj#getToSolveProblems"
   get '/spoj/refresh/:institution', :to => "spoj#refresh"
 
   get '/hackit', :to => "hack#doit"
