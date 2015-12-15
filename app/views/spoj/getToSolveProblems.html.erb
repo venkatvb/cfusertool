@@ -9,8 +9,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr dir-paginate="instance in problems | orderBy:predicate:reverse | itemsPerPage: 10" 
-				>
+			<tr dir-paginate="instance in problems | orderBy:predicate:reverse | itemsPerPage: 10" >
 				<td>{{$index+1}}</td>
 				<td>{{instance.problem}}</td>
 				<td>{{instance.solved}}</td>
