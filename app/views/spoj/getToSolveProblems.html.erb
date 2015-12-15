@@ -9,8 +9,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="instance in problems | orderBy:predicate:reverse" 
-				>
+			<tr dir-paginate="instance in problems | orderBy:predicate:reverse | itemsPerPage: 15">
 				<td>{{$index+1}}</td>
 				<td>{{instance.problem}}</td>
 				<td>{{instance.solved}}</td>
@@ -18,4 +17,9 @@
 			</tr>
 		</tbody>
   	</table>
+	<dir-pagination-controls 
+		boundary-links="true" 
+		on-page-change="pageChangeHandler(newPageNumber)" 
+		template-url="/pagination.tpl.html">
+	</dir-pagination-controls>
 </div>

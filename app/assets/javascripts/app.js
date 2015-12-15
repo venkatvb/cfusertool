@@ -1,4 +1,4 @@
-var app = angular.module('todoApp', []);
+var app = angular.module('todoApp', ['angularUtils.directives.dirPagination']);
 
 app.controller('ListController', ["$scope", "$http", function($scope, $http) {
 	$http({ method: 'GET', url: '/api/todos' }).
@@ -22,9 +22,7 @@ app.controller('SpojController', ["$scope", "$http", function($scope, $http) {
 	$scope.predicate = 'age';
   	$scope.reverse = true;
   	$scope.order = function(predicate) {
-  		console.log("came here");
     	$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
     	$scope.predicate = predicate;
   	};
 }]);
-
