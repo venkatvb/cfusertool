@@ -1,5 +1,7 @@
 class ApiController < ApplicationController
 	
+	@@userBaseUrl = "http://www.spoj.com/users/"
+
 	def getTodos
 		response = Hash.new
 		if signed_in?
@@ -18,7 +20,42 @@ class ApiController < ApplicationController
 		# Todo write this method :P
 	end
 
+	def getHashOfSolvedProblems (userHandle)
+		handle = userHandle
+		url = @@userBaseUrl + handle
+		cssSelectorForSolvedProblems = ".table-condensed a"
+		cssSelectorForTodoProblems = ".table:nth-child(4) a"
+		
+		doc = getNokogiriDoc(url)
+
+		if doc == false
+			return false
+		end
+
+		t = {}
+
+		doc.css(cssSelectorForSolvedProblems).each do |problem|
+			if not problem.text.empty?
+				t[problem.text] = "solved"
+			end
+		end
+		doc.css(cssSelectorForTodoProblems).each do |problem|
+			if not problem.text.empty?
+				t[problem.text] = "todo"
+			end
+		end
+
+		return t
+	end
+
 	def spoj
+		handle = params[:handle]
+		t = getHashOfSolvedProblems(handle)
+		if t.to_s == "false"
+			errorMessage = "oh! snap, may be the handle '" + handle + "' is invalid. If you are sure the handle is valid, raise an issue here, https://github.com/venkatvb/cfusertool/issues"
+			render json: errorMessage
+			return
+		end
 		items = SpojHandle.all
 		solvedHash = {}
 		todoHash = {}
@@ -58,7 +95,13 @@ class ApiController < ApplicationController
 			else
 				temp[:todo] = todoHash[problem]
 			end
-			result << temp
+			if t[problem].nil? 
+				temp[:attempted] = false
+				result << temp
+			elsif t[problem] == "todo"
+				temp[:attempted] = true
+				result << temp
+			end
 		end
 		render json: result
 	end

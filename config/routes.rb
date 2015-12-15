@@ -6,11 +6,8 @@ Cfusertool::Application.routes.draw do
   match '/todos/list' => 'todos#list'
 
   get '/api/todos', :to => "api#getTodos"
-  get '/api/spoj', :to => "api#spoj"
+  get '/api/spoj/:handle', :to => "api#spoj"
   get 'api/spojusers', :to => "api#spojUser"
-
-  match '/' => 'users#index'
-  get '/:handle1/:handle2', :to => "users#work"
 
   post '/signin' => 'sessions#create'
   match '/signin' => 'sessions#new'
@@ -21,10 +18,12 @@ Cfusertool::Application.routes.draw do
   match '/add' => 'friends#new'
   post '/create' => 'friends#create'
 
-  get '/spoj', :to => "spoj#find"
   get '/spoj/refresh/:institution', :to => "spoj#refresh"
-  
+
   get '/hackit', :to => "hack#doit"
+
+  match '/' => 'users#index'
+  get '/:handle1/:handle2', :to => "users#work"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
