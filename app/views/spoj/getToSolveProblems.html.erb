@@ -9,12 +9,7 @@
 			</tr>
 		</thead>
 		<tbody>
-<<<<<<< HEAD
 			<tr dir-paginate="instance in problems | orderBy:predicate:reverse | itemsPerPage: 15">
-=======
-			<tr dir-paginate="instance in problems | orderBy:predicate:reverse | itemsPerPage: 10" 
-				ng-class="instance.todo ? 'success' : ''">
->>>>>>> pagination
 				<td>{{$index+1}}</td>
 				<td>{{instance.problem}}</td>
 				<td>{{instance.solved}}</td>
