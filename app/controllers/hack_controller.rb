@@ -6,6 +6,7 @@ class HackController < ApplicationController
 	end
 
 	def doit
+		# TODO Make a research if possible to implement. This method fails in heroku dyno, as if has no firefox binary installed.
 		@times = 0
 		limit = 10
 		@error = false

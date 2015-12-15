@@ -2,13 +2,12 @@ Cfusertool::Application.routes.draw do
   
   resources "accounts"
   resources "todos", :only => [:new, :create]
-  
-  get '/hackit', :to => "hack#doit"
 
   match '/todos/list' => 'todos#list'
 
   get '/api/todos', :to => "api#getTodos"
   get '/api/spoj', :to => "api#spoj"
+  get 'api/spojusers', :to => "api#spojUser"
 
   match '/' => 'users#index'
   get '/:handle1/:handle2', :to => "users#work"
@@ -24,6 +23,8 @@ Cfusertool::Application.routes.draw do
 
   get '/spoj', :to => "spoj#find"
   get '/spoj/refresh/:institution', :to => "spoj#refresh"
+  
+  get '/hackit', :to => "hack#doit"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -63,4 +63,9 @@ class ApiController < ApplicationController
 		render json: result
 	end
 
+	def spojUser
+		items = SpojHandle.all
+		render json: items
+	end
+
 end
