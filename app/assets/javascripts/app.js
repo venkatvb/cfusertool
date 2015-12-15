@@ -1,4 +1,4 @@
-var app = angular.module('todoApp', ['angularUtils.directives.dirPagination']);
+var app = angular.module('todoApp', []);
 
 app.controller('ListController', ["$scope", "$http", function($scope, $http) {
 	$http({ method: 'GET', url: '/api/todos' }).
