@@ -10,9 +10,9 @@
 		</thead>
 		<tbody>
 			<tr dir-paginate="instance in problems | orderBy:predicate:reverse | itemsPerPage: 10" 
-				>
+				ng-class="instance.attempted ? 'success' : ''">
 				<td>{{$index+1}}</td>
-				<td>{{instance.problem}}</td>
+				<td><a href="http://www.spoj.com/problems/{{instance.problem}}/">{{instance.problem}}</a></td>
 				<td>{{instance.solved}}</td>
 				<td>{{instance.todo}}</td>
 			</tr>

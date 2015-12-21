@@ -11,7 +11,7 @@ app.controller('ListController', ["$scope", "$http", function($scope, $http) {
 }]);
 
 app.controller('SpojController', ["$scope", "$http", function($scope, $http) {
-	$http({ method: 'GET', url: '/api/spoj/venkatvb' }).
+	$http({ method: 'GET', url: 'http://cors.io/?u=https://cfusertool.herokuapp.com/api/spoj/venkatvb' }).
 		success(function (data, status, headers, config) {
 			$scope.problems = data
 		}).
