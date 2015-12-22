@@ -7,7 +7,6 @@ gem 'heroku'
 gem 'rails_12factor'
 gem 'rails_log_stdout', github: 'heroku/rails_log_stdout'
 gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
-gem 'sqlite3' 
 gem 'rspec-rails', '3.3.2'
 
 group :assets do
@@ -21,10 +20,12 @@ end
 gem 'jquery-rails'
 
 group :development do 
+	gem 'sqlite3' 
 	gem 'guard-rspec', '4.6.0' 
 end 
 
 group :test do 
+	gem 'sqlite3' 
 	gem 'test-unit'
 end 
 
